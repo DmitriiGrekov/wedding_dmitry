@@ -1,0 +1,96 @@
+version: '3.8'
+
+services:
+  # База данных PostgreSQL
+  db:
+    image: postgres:16-alpine
+    container_name: wedding_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB:-wedding_db}
+      - POSTGRES_USER=${POSTGRES_USER:-wedding_user}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-wedding_password}
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-wedding_user}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - wedding_network
+
+  # Backend Django
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: wedding_backend
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./backend:/app
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=${DEBUG:-True}
+      - SECRET_KEY=${SECRET_KEY:-django-insecure-change-this-in-production}
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-wedding_user}:${POSTGRES_PASSWORD:-wedding_password}@db:5432/${POSTGRES_DB:-wedding_db}
+      - POSTGRES_DB=${POSTGRES_DB:-wedding_db}
+      - POSTGRES_USER=${POSTGRES_USER:-wedding_user}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-wedding_password}
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - wedding_network
+
+  # Frontend React/Vite
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=${VITE_API_URL:-http://localhost:8080/api}
+    container_name: wedding_frontend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "5173:80"
+    environment:
+      - VITE_API_URL=${VITE_API_URL:-http://localhost:8080/api}
+    networks:
+      - wedding_network
+
+  # Nginx Reverse Proxy
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: wedding_nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - static_volume:/app/staticfiles:ro
+      - media_volume:/app/media:ro
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - wedding_network
+
+volumes:
+  postgres_data:
+    driver: local
+  static_volume:
+  media_volume:
+
+networks:
+  wedding_network:
+    driver: bridge
+

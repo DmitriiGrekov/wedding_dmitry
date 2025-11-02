@@ -2,6 +2,50 @@
   margin-top: 1rem;
 }
 
+/* Сообщения о статусе отправки */
+.submit-status {
+  padding: 1.2rem 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.6;
+  animation: slideDown 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.submit-status.success {
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.95), rgba(56, 142, 60, 0.95));
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.submit-status.error {
+  background: linear-gradient(135deg, rgba(244, 67, 54, 0.95), rgba(211, 47, 47, 0.95));
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.submit-status div {
+  margin: 0.3rem 0;
+}
+
+.submit-status div:first-child {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
 .guest-input {
   display: flex;
   align-items: center;
@@ -43,22 +87,25 @@
 
 .add-guest-btn,
 .submit-btn {
-  background: linear-gradient(135deg, #5b8bb5 0%, #4e6fa4 100%);
+  background: linear-gradient(135deg, rgba(91, 139, 181, 0.85) 0%, rgba(78, 111, 164, 0.9) 100%);
   color: white;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 15px;
-  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 12px;
+  padding: 0.9rem 2rem;
+  min-height: 48px;
   font-size: 1rem;
   font-weight: 500;
   letter-spacing: 0.5px;
   cursor: pointer;
   margin-top: 1rem;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 
-    0 4px 15px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  box-shadow: 
+    0 4px 15px rgba(78, 111, 164, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 
 .add-guest-btn::before,
@@ -66,51 +113,104 @@
   content: '';
   position: absolute;
   top: 0;
-  left: -100%;
+  left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .add-guest-btn:hover,
 .submit-btn:hover {
-  background: linear-gradient(135deg, #6a9dc9 0%, #5b7fb8 100%);
-  border-color: rgba(255, 255, 255, 0.5);
   transform: translateY(-2px);
   box-shadow: 
-    0 6px 25px rgba(0, 0, 0, 0.3),
-    0 0 20px rgba(78, 111, 164, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    0 6px 20px rgba(78, 111, 164, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .add-guest-btn:hover::before,
 .submit-btn:hover::before {
-  left: 100%;
+  opacity: 1;
 }
 
 .add-guest-btn:active,
 .submit-btn:active {
   transform: translateY(0);
   box-shadow: 
-    0 2px 10px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    0 2px 8px rgba(78, 111, 164, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .submit-btn {
   margin-left: 0.5rem;
-  background: linear-gradient(135deg, #d4af37 0%, #b8922f 100%);
-  border-color: rgba(255, 255, 255, 0.4);
+  background: linear-gradient(135deg, rgba(244, 215, 126, 0.95) 0%, rgba(212, 175, 55, 0.95) 100%);
   box-shadow: 
-    0 4px 15px rgba(212, 175, 55, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    0 4px 15px rgba(212, 175, 55, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .submit-btn:hover {
-  background: linear-gradient(135deg, #e6c878 0%, #d4af37 100%);
   box-shadow: 
-    0 6px 25px rgba(212, 175, 55, 0.5),
-    0 0 20px rgba(212, 175, 55, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    0 6px 20px rgba(212, 175, 55, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+/* Disabled состояние */
+.add-guest-btn:disabled,
+.submit-btn:disabled,
+.remove-guest-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  pointer-events: none;
+}
+
+.guest-input input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Улучшения для мобильных устройств */
+@media (max-width: 768px) {
+  .add-guest-btn,
+  .submit-btn {
+    padding: 1rem 2rem;
+    min-height: 50px;
+    font-size: 1.05rem;
+    width: 100%;
+    margin-top: 0.8rem;
+  }
+  
+  .submit-btn {
+    margin-left: 0;
+    margin-top: 0.8rem;
+  }
+  
+  /* На мобильных активируем эффект при touch, а не hover */
+  .add-guest-btn:active::before,
+  .submit-btn:active::before {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .add-guest-btn,
+  .submit-btn {
+    padding: 1.1rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 10px;
+  }
+  
+  .guest-input input {
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+  }
+  
+  .remove-guest-btn {
+    flex: 0 0 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
 }
 

@@ -5,10 +5,12 @@
 
 .telegram-qr h3 {
   font-family: 'Playfair Display', serif;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  color: #ffe9a7;
+  color: #ffd966;
   margin-bottom: 1rem;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  letter-spacing: 1px;
 }
 
 .qr-wrapper {
@@ -22,16 +24,70 @@
 .telegram-button {
   display: inline-block;
   margin-top: 1rem;
-  padding: 0.6rem 1.5rem;
-  background: #4e6fa4;
+  padding: 0.9rem 2rem;
+  min-height: 48px;
+  background: linear-gradient(135deg, rgba(91, 139, 181, 0.85) 0%, rgba(78, 111, 164, 0.9) 100%);
   color: white;
   text-decoration: none;
   font-size: 1rem;
-  border-radius: 20px;
-  transition: background 0.3s;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  border-radius: 12px;
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 4px 15px rgba(78, 111, 164, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.telegram-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .telegram-button:hover {
-  background: #35537a;
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 20px rgba(78, 111, 164, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.telegram-button:hover::before {
+  opacity: 1;
+}
+
+.telegram-button:active {
+  transform: translateY(0);
+  box-shadow: 
+    0 2px 8px rgba(78, 111, 164, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Мобильные улучшения */
+@media (max-width: 768px) {
+  .telegram-button {
+    padding: 1rem 2rem;
+    min-height: 50px;
+    font-size: 1.05rem;
+    width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .telegram-button {
+    padding: 1.1rem 1.5rem;
+    font-size: 1rem;
+  }
 }
 

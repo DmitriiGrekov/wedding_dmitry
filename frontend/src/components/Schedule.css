@@ -14,13 +14,14 @@
 
 .schedule h2 {
   text-align: center !important;
-  font-size: 2.2rem !important;
-  color: #ffe9a7 !important;
+  font-size: 2.3rem !important;
+  color: #ffd966 !important;
   margin-bottom: 1.8rem !important;
-  letter-spacing: 1px !important;
+  letter-spacing: 2px !important;
   text-transform: uppercase !important;
-  font-weight: 700 !important;
-  font-family: "Rubik Mono One", monospace !important;
+  font-weight: 600 !important;
+  font-family: 'Playfair Display', serif !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
 }
 
 .schedule h3 {
@@ -28,7 +29,8 @@
   font-size: 1.6rem !important;
   font-weight: 600 !important;
   margin-bottom: 1rem !important;
-  color: #ffe9a7 !important;
+  color: #ffd966 !important;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5) !important;
 }
 
 .schedule-item {
@@ -39,19 +41,21 @@
 }
 
 .schedule-item time {
-  font-weight: bold !important;
+  font-weight: 600 !important;
   font-size: 1.2rem !important;
   min-width: 60px !important;
   text-align: right !important;
   color: #fff !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) !important;
 }
 
 .schedule-item p {
   margin: 0 !important;
   font-size: 1.05rem !important;
-  color: #ecfbff !important;
-  line-height: 1.4 !important;
-  text-align:justify !important;
+  color: #ffffff !important;
+  line-height: 1.6 !important;
+  text-align: left !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) !important;
 }
 
 .schedule-map {

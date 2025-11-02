@@ -46,58 +46,96 @@
 
 .subtitle {
   text-transform: uppercase;
-  font-size: 0.8rem;
-  letter-spacing: 2px;
-  color: #7d7d7d;
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  color: #555;
   margin-bottom: 1rem;
+  font-weight: 500;
 }
 
 .names {
   font-family: 'Great Vibes', cursive;
   font-size: 6rem;
-  line-height: 1;
-  color: #000;
+  line-height: 1.1;
+  color: #1a1a1a;
   margin: 0;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .invite {
   text-transform: uppercase;
-  font-size: 0.9rem;
-  color: #7d7d7d;
+  font-size: 0.95rem;
+  color: #555;
   margin-top: 1.5rem;
-  letter-spacing: 1px;
-}
-
-.date {
-  font-size: 1.2rem;
-  margin-top: 0.5rem;
+  letter-spacing: 2px;
   font-weight: 500;
 }
 
+.date {
+  font-size: 1.3rem;
+  margin-top: 0.5rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
 .year {
-  font-size: 0.9rem;
-  color: #777;
+  font-size: 0.95rem;
+  color: #666;
   margin-top: 0.2rem;
+  font-weight: 500;
 }
 
 .scroll-down {
   margin-top: 2.5rem;
-  background: none;
-  border: 2px solid #4e6fa4;
-  color: #4e6fa4;
+  background: linear-gradient(135deg, rgba(91, 139, 181, 0.85) 0%, rgba(78, 111, 164, 0.9) 100%);
+  border: none;
+  color: white;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 56px;
+  height: 56px;
   font-size: 1.5rem;
   cursor: pointer;
   transition: all 0.3s ease;
   animation: bounce 2s infinite;
+  box-shadow: 
+    0 4px 15px rgba(78, 111, 164, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.scroll-down::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 50%;
 }
 
 .scroll-down:hover {
-  background: #4e6fa4;
-  color: white;
-  transform: translateY(3px);
+  background: linear-gradient(135deg, rgba(106, 157, 201, 0.95) 0%, rgba(91, 127, 184, 1) 100%);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 20px rgba(78, 111, 164, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  animation: none;
+}
+
+.scroll-down:hover::before {
+  opacity: 1;
+}
+
+.scroll-down:active {
+  transform: translateY(0);
+  box-shadow: 
+    0 2px 8px rgba(78, 111, 164, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 @keyframes bounce {
@@ -149,8 +187,8 @@
   }
 
   .scroll-down {
-    width: 45px;
-    height: 45px;
+    width: 52px;
+    height: 52px;
     font-size: 1.3rem;
     margin-top: 2rem;
   }
@@ -179,8 +217,8 @@
   }
 
   .scroll-down {
-    width: 38px;
-    height: 38px;
+    width: 48px;
+    height: 48px;
     font-size: 1rem;
   }
 }
