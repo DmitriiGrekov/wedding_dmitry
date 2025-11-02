@@ -1,0 +1,37 @@
+.telegram-qr {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.telegram-qr h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #ffe9a7;
+  margin-bottom: 1rem;
+}
+
+.qr-wrapper {
+  display: inline-block;
+  padding: 1rem;
+  background: rgba(78, 111, 164, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.telegram-button {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.6rem 1.5rem;
+  background: #4e6fa4;
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  border-radius: 20px;
+  transition: background 0.3s;
+}
+
+.telegram-button:hover {
+  background: #35537a;
+}
+

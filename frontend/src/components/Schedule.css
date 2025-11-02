@@ -1,0 +1,122 @@
+.schedule {
+  position: relative !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(8px) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
+  padding: 1.5rem 2rem !important;
+  margin-bottom: 2rem !important;
+  color: #ecfbff !important;
+  max-width: 800px !important;
+  text-align: left !important;
+  line-height: 1.7 !important;
+}
+
+.schedule h2 {
+  text-align: center !important;
+  font-size: 2.2rem !important;
+  color: #ffe9a7 !important;
+  margin-bottom: 1.8rem !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+  font-family: "Rubik Mono One", monospace !important;
+}
+
+.schedule h3 {
+  font-family: 'Playfair Display', serif !important;
+  font-size: 1.6rem !important;
+  font-weight: 600 !important;
+  margin-bottom: 1rem !important;
+  color: #ffe9a7 !important;
+}
+
+.schedule-item {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 20px !important;
+  margin-bottom: 1.6rem !important;
+}
+
+.schedule-item time {
+  font-weight: bold !important;
+  font-size: 1.2rem !important;
+  min-width: 60px !important;
+  text-align: right !important;
+  color: #fff !important;
+}
+
+.schedule-item p {
+  margin: 0 !important;
+  font-size: 1.05rem !important;
+  color: #ecfbff !important;
+  line-height: 1.4 !important;
+  text-align:justify !important;
+}
+
+.schedule-map {
+  margin-top: 1.5rem !important;
+  text-align: center !important;
+}
+
+.schedule-map h3 {
+  font-family: 'Playfair Display', serif !important;
+  font-size: 1.6rem !important;
+  font-weight: 600 !important;
+  margin-bottom: 1rem !important;
+  color: #ffe9a7 !important;
+}
+
+@media (max-width: 900px) {
+  .schedule {
+    padding: 40px 30px !important;
+  }
+
+  .schedule h2 {
+    font-size: 1.8rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .schedule-item {
+    gap: 16px !important;
+  }
+
+  .schedule-item time {
+    font-size: 1.1rem !important;
+    min-width: 50px !important;
+  }
+
+  .schedule-item p {
+    font-size: 1rem !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .schedule {
+    padding: 25px 20px !important;
+    border-radius: 20px !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  .schedule h2 {
+    font-size: 1.5rem !important;
+    margin-bottom: 1.2rem !important;
+  }
+
+  .schedule-item {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.3rem !important;
+  }
+
+  .schedule-item time {
+    font-size: 1rem !important;
+  }
+
+  .schedule-item p {
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+    text-align: left !important;
+  }
+}
+

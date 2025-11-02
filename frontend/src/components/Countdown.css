@@ -1,0 +1,48 @@
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.time-block {
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+}
+
+.time-value {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.time-label {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+@media (max-width: 900px) {
+  .countdown {
+    gap: 1.5rem;
+    margin-top: 1.8rem;
+  }
+
+  .time-value {
+    font-size: 1.4rem;
+  }
+
+  .time-label {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .time-value {
+    font-size: 1.1rem;
+  }
+
+  .time-label {
+    font-size: 0.7rem;
+  }
+}
+

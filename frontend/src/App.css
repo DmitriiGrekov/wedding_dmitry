@@ -1,0 +1,40 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #fff;
+  color: #111;
+  font-family: 'Playfair Display', serif;
+  overflow-x: hidden;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+.App {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.main-content {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.main-content.visible {
+  opacity: 1;
+}
+
+/* Предотвращаем горизонтальный скролл */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+

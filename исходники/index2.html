@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приглашение на свадьбу</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400&display=swap"
+        rel="stylesheet">
+
+    <style>
+
+        body {
+            margin: 0;
+            background-color: #fff;
+            color: #111;
+            font-family: 'Playfair Display', serif;
+            overflow-x: hidden;
+        }
+
+        /* === АНИМАЦИЯ КОНВЕРТА === */
+        #envelope-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        #envelope-wrapper.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.8;
+                transform: scale(1.3);
+            }
+        }
+
+        .envelope-container {
+            position: relative;
+            width: 380px;
+            height: 260px;
+            cursor: pointer;
+            transition: transform 0.4s ease;
+        }
+
+        .envelope-container:hover {
+            transform: scale(1.02);
+        }
+
+        /* Основа конверта */
+        .envelope-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            transition: transform 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border-radius: 4px;
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.15),
+                0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 2;
+        }
+
+        /* Письмо внутри */
+        .letter {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 340px;
+            height: 240px;
+            background: #ffffff;
+            border-radius: 3px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            transition: transform 1.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .letter.pull-out {
+            transform: translateX(-50%) translateY(-350px);
+        }
+
+        .letter-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            font-weight: 300;
+            color: #2c3e50;
+            letter-spacing: 2px;
+            line-height: 1.2;
+            margin: 0;
+        }
+
+        .ampersand {
+            font-size: 2rem;
+            color: #d4af37;
+            margin: 5px 0;
+        }
+
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            margin: 15px 0;
+        }
+
+        .letter-subtext {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #7f8c8d;
+            margin-top: 8px;
+        }
+
+        /* Клапан конверта */
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 140px;
+            background: linear-gradient(135deg, #e8eaf0 0%, #ffffff 100%);
+            transform-origin: top center;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            z-index: 4;
+            transition: transform 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border-radius: 4px 4px 0 0;
+        }
+
+        .envelope-flap.open {
+            transform: rotateX(180deg);
+        }
+
+        /* Декоративная печать */
+        .seal {
+            position: absolute;
+            top: 110px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 70px;
+            background: #d4af37;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            transition: all 0.6s ease;
+        }
+
+        .seal.fade-out {
+            opacity: 0;
+            transform: translateX(-50%) scale(0.5) rotate(180deg);
+        }
+
+        .seal-inner {
+            width: 60px;
+            height: 60px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: #ffffff;
+            font-weight: 300;
+        }
+
+        /* Подсказка */
+        .click-hint {
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.85rem;
+            color: #2c3e50;
+            letter-spacing: 1px;
+            opacity: 0.7;
+            animation: float 2.5s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+                opacity: 0.7;
+            }
+
+            50% {
+                transform: translateX(-50%) translateY(-8px);
+                opacity: 1;
+            }
+        }
+
+        /* === ОСНОВНОЙ КОНТЕНТ === */
+        #main-content {
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        #main-content.visible {
+            opacity: 1;
+        }
+
+        .main {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .left-image,
+        .right-image {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 50vw; /* адаптивная ширина — половина экрана */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 1;
+            pointer-events: none; /* чтобы не мешали кликам */
+            background: url("background-header.png") no-repeat center/cover;
+        }
+
+        /* Левая сторона */
+        .left-image {
+            left: 0;
+        }
+
+        /* Правая сторона */
+        .right-image {
+            right: 0;
+            transform: scaleX(-1);
+        }
+        .mid-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(20px);
+            padding: 2rem 3rem;
+            border-radius: 15px;
+            max-width: 700px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            color: #7d7d7d;
+            margin-bottom: 1rem;
+        }
+
+        .names {
+            font-family: 'Great Vibes', cursive;
+            font-size: 6rem;
+            line-height: 1;
+            color: #000;
+            margin: 0;
+        }
+
+        .invite {
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            color: #7d7d7d;
+            margin-top: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .date {
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
+        .year {
+            font-size: 0.9rem;
+            color: #777;
+            margin-top: 0.2rem;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .time-block {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .time-value {
+            font-size: 1.6rem;
+            font-weight: bold;
+        }
+
+        .time-label {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .event-info {
+            position: relative;
+            background: url("background.jpg") no-repeat center/cover;
+            color: white;
+            text-align: center;
+            padding: 4rem 1rem;
+        }
+
+        .event-info::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        .event-overlay {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+            height: 100%;
+        }
+
+        .event-content {
+            position: relative;
+            max-width: 750px;
+            width: 90%;
+            padding: 2.5rem 3rem;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(8px);
+            border-radius: 24px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            color: #ecfbff;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .event-content h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: #ecfbff;
+        }
+
+        .event-content h3 {
+            font-family: "Rubik Mono One", monospace;
+            font-weight: 400;
+            font-style: normal;
+            margin-top: 2rem;
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #ffe9a7;
+        }
+
+        .event-content p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin: 0.8rem 0;
+        }
+
+        .scroll-down {
+            margin-top: 2.5rem;
+            background: none;
+            border: 2px solid #4e6fa4;
+            color: #4e6fa4;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-down:hover {
+            background: #4e6fa4;
+            color: white;
+            transform: translateY(3px);
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(10px);
+            }
+
+            60% {
+                transform: translateY(5px);
+            }
+        }
+
+        .schedule {
+            position: relative;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(8px);
+            border-radius: 24px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            color: #ecfbff;
+        }
+
+        .schedule h3 {
+            font-family: "Rubik Mono One", monospace;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #ffe9a7;
+            text-align: center;
+        }
+
+        .schedule-item {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            margin-bottom: 0.8rem;
+        }
+
+        .schedule-item .time {
+            flex: 0 0 70px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .schedule-item .description {
+            flex: 1;
+            color: #ecfbff;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        .schedule-map {
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .schedule-map h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #ffe9a7;
+        }
+
+        .guest-input {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.8rem;
+            flex-wrap: nowrap;
+        }
+
+        .guest-input input {
+            flex: 1 1 auto;
+            min-width: 0;
+            padding: 0.6rem 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 1rem;
+        }
+
+        .guest-input input::placeholder {
+            color: #ecfbff;
+        }
+
+        .remove-guest-btn {
+            flex: 0 0 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .remove-guest-btn:hover {
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        .add-guest-btn,
+        .submit-btn {
+            background: #4e6fa4;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 0.6rem 1.2rem;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background 0.3s;
+        }
+
+        .add-guest-btn:hover,
+        .submit-btn:hover {
+            background: #35537a;
+        }
+
+        .telegram-qr {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .telegram-qr h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #ffe9a7;
+            margin-bottom: 1rem;
+        }
+
+        .qr-wrapper {
+            display: inline-block;
+            padding: 1rem;
+            background: rgba(78, 111, 164, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .telegram-button {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.6rem 1.5rem;
+            background: #4e6fa4;
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            border-radius: 20px;
+            transition: background 0.3s;
+        }
+
+        .telegram-button:hover {
+            background: #35537a;
+        }
+
+        @media (max-width: 900px) {
+            .main {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto;
+            }
+            .left-image,
+            .right-image {
+                width: 35vw;
+                opacity: 0.4;
+            }
+
+            .mid-content {
+                padding: 2rem 1rem;
+            }
+
+            .names {
+                font-size: 3.5rem;
+            }
+
+            .envelope-container {
+                width: 320px;
+                height: 220px;
+            }
+
+            .letter {
+                width: 290px;
+                height: 200px;
+                padding: 20px;
+            }
+
+            .letter-text {
+                font-size: 2.2rem;
+            }
+
+            .envelope-flap {
+                height: 120px;
+            }
+
+            .seal {
+                width: 60px;
+                height: 60px;
+                top: 95px;
+            }
+
+            .seal-inner {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+
+            .click-hint {
+                font-size: 0.75rem;
+                bottom: -50px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .names {
+                font-size: 2.4rem;
+            }
+
+            .event-content {
+                padding: 1.5rem;
+            }
+
+            .event-content h2 {
+                font-size: 2.5rem;
+            }
+
+            .event-content p {
+                font-size: 1rem;
+            }
+        }
+        /* === АДАПТАЦИЯ ДЛЯ ЭКРАНОВ ДО 900px (ПЛАНШЕТЫ И МОБИЛЬНЫЕ) === */
+@media (max-width: 900px) {
+    .main {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        overflow: hidden;
+        background: url("background.jpg") no-repeat center/cover;
+    }
+
+    .left-image,
+    .right-image {
+        display: none;
+    }
+
+    .left-image {
+        left: 0;
+    }
+
+    .right-image {
+        right: 0;
+        transform: scaleX(-1);
+    }
+
+    .mid-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.4);
+        border-radius: 20px;
+        backdrop-filter: blur(8px);
+        padding: 7rem 7rem;
+        max-width: 85%;
+    }
+
+    .names {
+        font-size: 3rem;
+        line-height: 1.1;
+    }
+
+    .invite {
+        font-size: 1rem;
+        margin-top: 1rem;
+    }
+
+    .date {
+        font-size: 1.2rem;
+    }
+
+    .year {
+        font-size: 0.9rem;
+    }
+
+    .countdown {
+        gap: 1.5rem;
+        margin-top: 1.8rem;
+    }
+
+    .time-value {
+        font-size: 1.4rem;
+    }
+
+    .time-label {
+        font-size: 0.8rem;
+    }
+
+    .scroll-down {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+        margin-top: 2rem;
+    }
+
+    .event-content h2 {
+        font-size: 2.4rem;
+    }
+
+    .event-content h3 {
+        font-size: 1.2rem;
+    }
+
+    .event-content p {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+}
+
+/* === АДАПТАЦИЯ ДЛЯ ЭКРАНОВ ДО 600px (ТЕЛЕФОНЫ) === */
+@media (max-width: 600px) {
+    .left-image,
+    .right-image {
+        width: 40vw;
+        opacity: 0.3;
+    }
+
+    .mid-content {
+        padding: 4rem 3rem;
+        max-width: 90%;
+    }
+
+    .names {
+        font-size: 2.2rem;
+    }
+
+    .invite {
+        font-size: 0.85rem;
+    }
+
+    .date {
+        font-size: 1rem;
+    }
+
+    .year {
+        font-size: 0.8rem;
+    }
+
+    .time-value {
+        font-size: 1.1rem;
+    }
+
+    .time-label {
+        font-size: 0.7rem;
+    }
+
+    .scroll-down {
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
+    }
+}
+.left-image,
+.right-image {
+  overflow: hidden;
+}
+
+/* Исправляем утечку картинки справа */
+.right-image {
+  right: 0;
+  transform: scaleX(-1);
+  clip-path: inset(0 0 0 0);
+  overflow: hidden;
+}
+
+/* Страховка от появления горизонтального скролла */
+html, body {
+  overflow-x: hidden;
+}
+
+/* === АДАПТАЦИЯ ДЛЯ ЭКРАНОВ ДО 900px (планшеты) === */
+@media (max-width: 900px) {
+  .event-info {
+    padding: 2rem 1.5rem;
+    margin: 0 auto;
+    background: url("background.jpg") no-repeat center/cover;
+  }
+
+  .event-info h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .event-info h3 {
+    font-size: 1.2rem;
+  }
+
+  .event-info p {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .event-time {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  .event-map {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 16px;
+  }
+}
+
+/* === АДАПТАЦИЯ ДЛЯ ЭКРАНОВ ДО 600px (телефоны) === */
+@media (max-width: 600px) {
+  .event-info {
+    max-width: 100%;
+    padding: 1.5rem 1rem;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    background: url("background.jpg") no-repeat center/cover;
+  }
+
+  .event-info h2 {
+    font-size: 1.6rem;
+    line-height: 1.3;
+  }
+
+  .event-info h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .event-info p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .event-info .event-time {
+    display: block;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .event-info .event-item {
+    margin-bottom: 1.2rem;
+  }
+
+  .event-map {
+    width: 100%;
+    height: 300px;
+    border-radius: 12px;
+    margin-top: 1rem;
+  }
+}
+
+.schedule {
+  max-width: 800px;
+  backdrop-filter: blur(10px);
+  border-radius: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  text-align: left;
+  line-height: 1.7;
+}
+
+.schedule h2 {
+  text-align: center;
+  font-size: 2.2rem;
+  color: #ffe9a7;
+  margin-bottom: 1.8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-family: "Rubik Mono One", monospace;
+}
+
+.schedule h3 {
+  font-weight: 700;
+  font-family: "Rubik Mono One", monospace;
+  color: #ffe9a7;
+  margin-top: 0pxs;
+}
+
+.schedule-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 1.6rem;
+}
+
+.schedule-item time {
+  font-weight: bold;
+  font-size: 1.2rem;
+  min-width: 60px;
+  text-align: right;
+}
+
+.schedule-item p {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+/* === Адаптация для экранов до 900px === */
+@media (max-width: 900px) {
+  .schedule {
+    max-width: 90%;
+    padding: 40px 30px;
+  }
+
+  .schedule h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .schedule-item {
+    gap: 16px;
+  }
+
+  .schedule-item time {
+    font-size: 1.1rem;
+    min-width: 50px;
+  }
+
+  .schedule-item p {
+    font-size: 1rem;
+  }
+}
+
+/* === Адаптация для телефонов до 600px === */
+@media (max-width: 600px) {
+  .schedule {
+    max-width: 95%;
+    padding: 25px 20px;
+    border-radius: 20px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .schedule h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .schedule-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+
+  .schedule-item time {
+    font-size: 1rem;
+  }
+
+  .schedule-item p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    text-align: left;
+  }
+}
+
+
+
+    </style>
+</head>
+
+<body>
+    <!-- Анимация конверта -->
+    <div id="envelope-wrapper">
+        <div class="envelope-container" id="envelope">
+            <div class="envelope-back"></div>
+            <div class="letter" id="letter">
+                <h1 class="letter-text">Дмитрий</h1>
+                <div class="ampersand">&</div>
+                <h1 class="letter-text">Екатерина</h1>
+                <div class="divider"></div>
+                <p class="letter-subtext">Приглашают вас</p>
+            </div>
+            <div class="envelope-flap" id="flap"></div>
+            <div class="seal" id="seal">
+                <div class="seal-inner">D&E</div>
+            </div>
+            <div class="click-hint">Нажмите, чтобы открыть</div>
+        </div>
+    </div>
+
+    <!-- Основной контент -->
+    <div id="main-content">
+        <div class="main" id="event" data-event-date="2026-07-18T15:00:00+03:00">
+            <div class="left-image"></div>
+
+            <div class="mid-content">
+                <h1 class="names">Дмитрий<br>&<br>Екатерина</h1>
+
+                <div class="invite">приглашаем вас<br>на нашу свадьбу</div>
+                <div class="date">18 июля</div>
+                <div class="year">2026 года</div>
+
+                <div id="countdown" class="countdown"></div>
+                <button class="scroll-down" onclick="scrollToEventInfo()">↓</button>
+            </div>
+
+            <div class="right-image"></div>
+        </div>
+
+        <section class="event-info">
+            <div class="event-overlay">
+                <div class="event-content">
+                    <h2>Дорогой<br>Гость!</h2>
+
+                    <p>
+                        Мы рады сообщить Вам, что <strong>18.07.2026</strong> состоится самое главное торжество в нашей
+                        жизни — день
+                        нашей свадьбы!<br>
+                        Приглашаем Вас разделить с нами радость этого незабываемого дня.
+                    </p>
+
+                    <p><strong>18.07.2026 в 10:00</strong></p>
+
+                    <h3>Пожелания по подаркам</h3>
+                    <p>Ваше присутствие в день нашей свадьбы — самый значимый подарок для нас!</p>
+
+                    <section class="schedule">
+                        <h2>Свадебное расписание</h2>
+                      
+                        <div class="schedule-item">
+                          <time>10:00</time>
+                          <p>Торжественная роспись — ЗАГС. Приглашаем вас разделить вместе с нами радость создания новой семьи.</p>
+                        </div>
+                      
+                        <div class="schedule-item">
+                          <time>12:00</time>
+                          <p>Фуршет — Банкетный зал. После росписи вас доставят до банкетного зала 2 минивэна. Именно здесь мы отметим наш незабываемый день.</p>
+                        </div>
+                        <div class="schedule-map">
+                            <h3>Место проведения</h3>
+                            <iframe
+                                src="https://yandex.ru/map-widget/v1/?um=constructor%3Aee33a1ba858e5427672eaf6a7750f77d38e46ea509913d1f14408dd25661533e&amp;source=constructor"
+                                width="100%" height="300" frameborder="0" style="border:0; border-radius:16px;"
+                                allowfullscreen></iframe>
+                        </div>
+                      </section>
+
+                    <h3>Подтверждение</h3>
+                    <p>
+                        Пожалуйста, подтвердите своё присутствие до <strong>01.01.2025</strong>.<br>
+                        Ждём Вас!<br>
+                    </p>
+
+                    <form id="guests-form">
+                        <div id="guest-list">
+                            <div class="guest-input">
+                                <input type="text" name="last-name[]" placeholder="Фамилия" required>
+                                <input type="text" name="first-name[]" placeholder="Имя" required>
+                            </div>
+                        </div>
+                        <button type="button" class="add-guest-btn" id="add-guest">Добавить гостя</button>
+                        <button type="submit" class="submit-btn">Подтвердить</button>
+                    </form>
+
+                    <div class="telegram-qr">
+                        <h3>Присоединяйтесь к нашей группе в Telegram</h3>
+                        <div id="qr-code" class="qr-wrapper"></div>
+                    </div>
+                    <a href="https://t.me/ВАША_ССЫЛКА_НА_ГРУППУ" target="_blank" class="telegram-button">Перейти в
+                        Telegram</a>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/qr-code-styling/lib/qr-code-styling.js"></script>
+    <script>
+        // Анимация конверта
+        const envelope = document.getElementById('envelope');
+        const flap = document.getElementById('flap');
+        const letter = document.getElementById('letter');
+        const seal = document.getElementById('seal');
+        const envelopeWrapper = document.getElementById('envelope-wrapper');
+        const mainContent = document.getElementById('main-content');
+
+        let animationStarted = false;
+
+        envelope.addEventListener('click', () => {
+            if (animationStarted) return;
+            animationStarted = true;
+
+            // Исчезает печать
+            seal.classList.add('fade-out');
+
+            // Открывается клапан
+            setTimeout(() => {
+                flap.classList.add('open');
+            }, 300);
+
+            // Конверт опускается вниз
+            setTimeout(() => {
+                envelope.style.transform = 'translateY(200px)';
+                envelope.style.transition = 'transform 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+            }, 800);
+
+            // Выдвигается письмо (остается по центру)
+            setTimeout(() => {
+                letter.classList.add('pull-out');
+            }, 800);
+
+            // Скрывается конверт и показывается контент
+            setTimeout(() => {
+                envelopeWrapper.classList.add('hidden');
+                mainContent.classList.add('visible');
+            }, 4000);
+        });
+
+        // Таймер обратного отсчета
+        const countdownEl = document.getElementById('countdown');
+        const eventDate = new Date(document.getElementById('event').dataset.eventDate);
+
+        function updateCountdown() {
+            const now = new Date();
+            const diff = eventDate - now;
+            if (diff <= 0) {
+                countdownEl.innerHTML = "<div>Событие уже началось</div>";
+                return;
+            }
+
+            const totalSeconds = Math.floor(diff / 1000);
+            const weeks = Math.floor(totalSeconds / (7 * 24 * 3600));
+            const days = Math.floor((totalSeconds % (7 * 24 * 3600)) / (24 * 3600));
+            const hours = Math.floor((totalSeconds % (24 * 3600)) / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+
+            countdownEl.innerHTML = `
+        <div class="time-block"><div class="time-value">${weeks}</div><div class="time-label">недель</div></div>
+        <div class="time-block"><div class="time-value">${days.toString().padStart(2, '0')}</div><div class="time-label">дней</div></div>
+        <div class="time-block"><div class="time-value">${hours.toString().padStart(2, '0')}</div><div class="time-label">часов</div></div>
+        <div class="time-block"><div class="time-value">${minutes.toString().padStart(2, '0')}</div><div class="time-label">минут</div></div>
+        <div class="time-block"><div class="time-value">${seconds.toString().padStart(2, '0')}</div><div class="time-label">секунд</div></div>
+      `;
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        function scrollToEventInfo() {
+            const eventSection = document.querySelector('.event-info');
+            const elementPosition = eventSection.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+
+        // Форма гостей
+        const guestList = document.getElementById('guest-list');
+        const addGuestBtn = document.getElementById('add-guest');
+        let guestCount = 1;
+        const MAX_GUESTS = 4;
+
+        addGuestBtn.addEventListener('click', () => {
+            if (guestCount >= MAX_GUESTS) {
+                alert(`Можно добавить максимум ${MAX_GUESTS} гостей.`);
+                return;
+            }
+
+            guestCount++;
+
+            const guestDiv = document.createElement('div');
+            guestDiv.classList.add('guest-input');
+            guestDiv.innerHTML = `
+        <input type="text" name="last-name[]" placeholder="Фамилия" required>
+        <input type="text" name="first-name[]" placeholder="Имя" required>
+        <button type="button" class="remove-guest-btn" title="Удалить гостя">✕</button>
+      `;
+
+            guestList.appendChild(guestDiv);
+
+            guestDiv.querySelector('.remove-guest-btn').addEventListener('click', () => {
+                guestDiv.remove();
+                guestCount--;
+            });
+        });
+
+        document.getElementById('guests-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const lastNames = [...document.querySelectorAll('input[name="last-name[]"]')].map(i => i.value.trim());
+            const firstNames = [...document.querySelectorAll('input[name="first-name[]"]')].map(i => i.value.trim());
+
+            const guests = lastNames.map((ln, idx) => `${ln} ${firstNames[idx]}`).filter(n => n.trim() !== "");
+
+            if (guests.length === 0) {
+                alert("Пожалуйста, введите хотя бы одного гостя!");
+                return;
+            }
+
+            alert(`Спасибо! Вы подтвердили участие для следующих гостей:\n\n${guests.join("\n")}`);
+
+            guestList.innerHTML = `
+        <div class="guest-input">
+          <input type="text" name="last-name[]" placeholder="Фамилия" required>
+          <input type="text" name="first-name[]" placeholder="Имя" required>
+        </div>`;
+            guestCount = 1;
+        });
+
+        // QR код
+        const qrCode = new QRCodeStyling({
+            width: 200,
+            height: 200,
+            data: "https://t.me/ВАША_ССЫЛКА_НА_ГРУППУ",
+            image: "",
+            dotsOptions: {
+                color: "#ecfbff",
+                type: "rounded"
+            },
+            backgroundOptions: {
+                color: "transparent",
+            },
+            cornersSquareOptions: {
+                type: "extra-rounded",
+                color: "#ecfbff"
+            }
+        });
+
+        qrCode.append(document.getElementById("qr-code"));
+    </script>
+
+</body>
+
+</html>
