@@ -8,8 +8,7 @@ const GuestForm = () => {
   const MAX_GUESTS = 4;
 
   // API URL из переменных окружения или дефолтный
-  // const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
-  const API_URL = 'http://localhost:8080/api'
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
 
 
   const handleAddGuest = () => {

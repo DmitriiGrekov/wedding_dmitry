@@ -1,7 +1,8 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
-from .models import Guest
-from .serializers import GuestSerializer
+from rest_framework.views import APIView
+from .models import Guest, Invitation
+from .serializers import GuestSerializer, InvitationSerializer
 
 
 class GuestListCreateView(generics.ListCreateAPIView):
@@ -29,3 +30,28 @@ class GuestDetailView(generics.RetrieveUpdateDestroyAPIView):
     """
     queryset = Guest.objects.all()
     serializer_class = GuestSerializer
+
+
+class InvitationByUUIDView(APIView):
+    """
+    API endpoint для получения информации о приглашении по UUID.
+    
+    GET /api/invitations/by-uuid/{uuid}/ - получить информацию о приглашении
+    """
+    
+    def get(self, request, uuid):
+        try:
+            invitation = Invitation.objects.get(uuid=uuid)
+            serializer = InvitationSerializer(invitation)
+            return Response(serializer.data)
+            
+        except Invitation.DoesNotExist:
+            return Response(
+                {'error': 'Приглашение с таким UUID не найдено'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        except Exception as e:
+            return Response(
+                {'error': str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )

@@ -186,7 +186,7 @@ CORS_ALLOW_METHODS = [
     'PUT',
 ]
 
-CSRF_TRUSTED_ORIGINS = ['https://2c474a97105a.ngrok-free.app',]
+CSRF_TRUSTED_ORIGINS = ['https://2c474a97105a.ngrok-free.app', 'http://localhost:8080', 'http://localhost:80']
 
 # Дополнительные настройки для работы за прокси (nginx)
 USE_X_FORWARDED_HOST = True

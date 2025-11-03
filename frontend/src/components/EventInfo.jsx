@@ -1,18 +1,59 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Schedule from './Schedule';
 import GuestForm from './GuestForm';
 import TelegramQR from './TelegramQR';
 import './EventInfo.css';
 
 const EventInfo = () => {
+  const [guestNames, setGuestNames] = useState('Гость');
+  const [isPlural, setIsPlural] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchInvitation = async () => {
+      try {
+        // Получаем UUID из URL (например, /?uuid=...)
+        const urlParams = new URLSearchParams(window.location.search);
+        const uuid = urlParams.get('uuid');
+        const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
+
+        if (uuid) {
+          const response = await fetch(`${API_URL}/guests/invitations/by-uuid/${uuid}/`);
+          
+          if (response.ok) {
+            const data = await response.json();
+            setGuestNames(data.guest_names);
+            setIsPlural(data.is_plural);
+          } else {
+            console.error('Приглашение не найдено');
+          }
+        }
+      } catch (error) {
+        console.error('Ошибка при загрузке приглашения:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchInvitation();
+  }, []);
+
+  const greeting = isPlural ? 'Дорогие' : 'Дорогой';
+
   return (
     <section className="event-info">
       <div className="event-overlay">
         <div className="event-content">
           <h2>
-            Дорогой
-            <br />
-            Гость!
+            {loading ? (
+              <>Дорогой<br />Гость!</>
+            ) : (
+              <>
+                {greeting}
+                <br />
+                {guestNames}!
+              </>
+            )}
           </h2>
 
           <p>

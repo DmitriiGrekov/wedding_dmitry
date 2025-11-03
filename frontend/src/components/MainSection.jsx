@@ -30,9 +30,9 @@ const MainSection = ({ eventDate }) => {
         </h1>
 
         <div className="invite">
-          приглашаем вас
+          приглашают вас
           <br />
-          на нашу свадьбу
+          на свадьбу
         </div>
         <div className="date">18 июля</div>
         <div className="year">2026 года</div>
