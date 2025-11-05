@@ -12,6 +12,6 @@ class GuestSerializer(serializers.ModelSerializer):
 class InvitationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Invitation
-        fields = ['id', 'uuid', 'guest_names', 'is_plural', 'created_at']
+        fields = ['id', 'uuid', 'guest_names', 'is_plural', 'gender', 'created_at']
         read_only_fields = ['id', 'uuid', 'created_at']
 

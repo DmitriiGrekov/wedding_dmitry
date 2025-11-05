@@ -7,6 +7,12 @@ class Invitation(models.Model):
     Модель приглашения для отображения на сайте.
     Содержит имена гостей и флаг множественного числа.
     """
+    GENDER_CHOICES = [
+        ('male', 'Мужской'),
+        ('female', 'Женский'),
+        ('neutral', 'Нейтральное/Общее'),
+    ]
+    
     uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True, db_index=True)
     guest_names = models.TextField(
         verbose_name='Имена гостей',
@@ -16,6 +22,13 @@ class Invitation(models.Model):
         default=False,
         verbose_name='Множественное число',
         help_text='Отметьте, если приглашение для нескольких человек'
+    )
+    gender = models.CharField(
+        max_length=10,
+        choices=GENDER_CHOICES,
+        default='neutral',
+        verbose_name='Пол',
+        help_text='Выберите пол для персонализации текста приглашения'
     )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     

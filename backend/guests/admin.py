@@ -4,16 +4,16 @@ from .models import Guest, Invitation
 
 @admin.register(Invitation)
 class InvitationAdmin(admin.ModelAdmin):
-    list_display = ['id', 'guest_names', 'is_plural', 'uuid', 'created_at']
+    list_display = ['id', 'guest_names', 'is_plural', 'gender', 'uuid', 'created_at']
     list_display_links = ['id', 'guest_names']
     search_fields = ['guest_names', 'uuid']
-    list_filter = ['is_plural', 'created_at']
+    list_filter = ['is_plural', 'gender', 'created_at']
     readonly_fields = ['uuid', 'created_at']
     ordering = ['-created_at']
     
     fieldsets = (
         ('Информация о приглашении', {
-            'fields': ('guest_names', 'is_plural')
+            'fields': ('guest_names', 'is_plural', 'gender')
         }),
         ('Системная информация', {
             'fields': ('uuid', 'created_at'),

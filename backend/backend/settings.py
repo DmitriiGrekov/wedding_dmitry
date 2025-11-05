@@ -15,7 +15,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-wro=fwwbdl7w4@j$uvmty
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,backend,2c474a97105a.ngrok-free.app').split(',')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,backend,2c474a97105a.ngrok-free.app,b48aebe29b5c.ngrok-free.app,33c44dc59ada.ngrok-free.app').split(',')
 
 
 # Application definition
@@ -186,7 +186,7 @@ CORS_ALLOW_METHODS = [
     'PUT',
 ]
 
-CSRF_TRUSTED_ORIGINS = ['https://2c474a97105a.ngrok-free.app', 'http://localhost:8080', 'http://localhost:80']
+CSRF_TRUSTED_ORIGINS = ['https://2c474a97105a.ngrok-free.app', 'http://localhost:8080', 'http://localhost:80', 'https://b48aebe29b5c.ngrok-free.app', 'https://33c44dc59ada.ngrok-free.app']
 
 # Дополнительные настройки для работы за прокси (nginx)
 USE_X_FORWARDED_HOST = True
