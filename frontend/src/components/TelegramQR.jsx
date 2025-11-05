@@ -35,10 +35,15 @@ const TelegramQR = ({ telegramLink = 'https://t.me/ВАША_ССЫЛКА_НА_Г
 
   return (
     <div className="telegram-qr">
-      <h3>Присоединяйтесь к нашей группе в Telegram</h3>
+      <h3>Давайте общаться! 💬</h3>
+      <p style={{ fontSize: '0.95rem', marginBottom: '1rem', opacity: 0.9 }}>
+        Присоединяйтесь к нашему чату в Telegram — делитесь впечатлениями, 
+        задавайте вопросы и будьте в курсе всех деталей!
+      </p>
       <div ref={qrRef} className="qr-wrapper"></div><br/>
       <a href={telegramLink} target="_blank" rel="noopener noreferrer" className="telegram-button">
-        Перейти в Telegram
+        <img src="/telegram.png" alt="" className="telegram-icon" />
+        <span>Присоединиться к чату</span>
       </a>
     </div>
   );

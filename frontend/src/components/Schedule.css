@@ -14,23 +14,24 @@
 
 .schedule h2 {
   text-align: center !important;
-  font-size: 2.3rem !important;
+  font-size: 2.2rem !important;
   color: #ffd966 !important;
   margin-bottom: 1.8rem !important;
-  letter-spacing: 2px !important;
+  letter-spacing: 2.5px !important;
   text-transform: uppercase !important;
   font-weight: 600 !important;
-  font-family: 'Playfair Display', serif !important;
+  font-family: 'Inter', sans-serif !important;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
 }
 
 .schedule h3 {
-  font-family: 'Playfair Display', serif !important;
-  font-size: 1.6rem !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 1.5rem !important;
   font-weight: 600 !important;
   margin-bottom: 1rem !important;
   color: #ffd966 !important;
   text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5) !important;
+  letter-spacing: 0.5px !important;
 }
 
 .schedule-item {
@@ -41,8 +42,9 @@
 }
 
 .schedule-item time {
+  font-family: 'Cormorant Garamond', serif !important;
   font-weight: 600 !important;
-  font-size: 1.2rem !important;
+  font-size: 1.3rem !important;
   min-width: 60px !important;
   text-align: right !important;
   color: #fff !important;
@@ -50,12 +52,15 @@
 }
 
 .schedule-item p {
+  font-family: 'Inter', sans-serif !important;
   margin: 0 !important;
   font-size: 1.05rem !important;
   color: #ffffff !important;
-  line-height: 1.6 !important;
+  line-height: 1.7 !important;
   text-align: left !important;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.01em !important;
 }
 
 .schedule-map {
@@ -64,11 +69,12 @@
 }
 
 .schedule-map h3 {
-  font-family: 'Playfair Display', serif !important;
-  font-size: 1.6rem !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 1.5rem !important;
   font-weight: 600 !important;
   margin-bottom: 1rem !important;
   color: #ffe9a7 !important;
+  letter-spacing: 0.5px !important;
 }
 
 @media (max-width: 900px) {
@@ -121,6 +127,47 @@
     font-size: 0.95rem !important;
     line-height: 1.6 !important;
     text-align: left !important;
+  }
+
+  .schedule-map iframe {
+    height: 250px;
+  }
+}
+
+@media (max-width: 400px) {
+  .schedule {
+    padding: 20px 15px !important;
+    border-radius: 16px !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .schedule h2 {
+    font-size: 1.3rem !important;
+    margin-bottom: 1rem !important;
+    letter-spacing: 1px !important;
+  }
+
+  .schedule h3 {
+    font-size: 1.3rem !important;
+  }
+
+  .schedule-item {
+    margin-bottom: 1.2rem !important;
+    gap: 0.2rem !important;
+  }
+
+  .schedule-item time {
+    font-size: 0.95rem !important;
+  }
+
+  .schedule-item p {
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .schedule-map iframe {
+    height: 220px;
+    border-radius: 12px;
   }
 }
 

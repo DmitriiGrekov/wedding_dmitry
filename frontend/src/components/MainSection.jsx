@@ -30,16 +30,16 @@ const MainSection = ({ eventDate }) => {
         </h1>
 
         <div className="invite">
-          приглашают вас
+          С радостью приглашаем вас
           <br />
-          на свадьбу
+          отпраздновать нашу свадьбу
         </div>
         <div className="date">18 июля</div>
         <div className="year">2026 года</div>
 
         <Countdown eventDate={eventDate} />
         <button className="scroll-down" onClick={scrollToEventInfo}>
-          ↓
+          <img src="/arrow.png" alt="" className="scroll-arrow-icon" />
         </button>
       </div>
 

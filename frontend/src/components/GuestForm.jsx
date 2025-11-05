@@ -13,7 +13,7 @@ const GuestForm = () => {
 
   const handleAddGuest = () => {
     if (guests.length >= MAX_GUESTS) {
-      alert(`Можно добавить максимум ${MAX_GUESTS} гостей.`);
+      alert(`Максимум ${MAX_GUESTS} гостя в одной заявке 😊`);
       return;
     }
     setGuests([...guests, { lastName: '', firstName: '' }]);
@@ -41,7 +41,7 @@ const GuestForm = () => {
     if (filledGuests.length === 0) {
       setSubmitStatus({
         type: 'error',
-        message: 'Пожалуйста, введите хотя бы одного гостя с именем и фамилией!'
+        message: 'Пожалуйста, укажите хотя бы одного гостя!'
       });
       return;
     }
@@ -81,7 +81,7 @@ const GuestForm = () => {
 
       setSubmitStatus({
         type: 'success',
-        message: `🎉 Спасибо! Вы успешно подтвердили участие для:\n\n${guestNames}\n\nМы с нетерпением ждём вас на нашей свадьбе!`
+        message: `🎉 Отлично! Подтверждение получено для:\n\n${guestNames}\n\nНе можем дождаться встречи с вами!`
       });
 
       // Сброс формы через 3 секунды
@@ -94,7 +94,7 @@ const GuestForm = () => {
       console.error('Ошибка отправки данных:', error);
       setSubmitStatus({
         type: 'error',
-        message: `❌ Произошла ошибка: ${error.message}\n\nПожалуйста, попробуйте ещё раз или свяжитесь с нами.`
+        message: `❌ Что-то пошло не так: ${error.message}\n\nПопробуйте еще раз или напишите нам напрямую!`
       });
     } finally {
       setLoading(false);
@@ -151,14 +151,16 @@ const GuestForm = () => {
         onClick={handleAddGuest}
         disabled={loading || guests.length >= MAX_GUESTS}
       >
-        Добавить гостя
+        <img src="/plus.png" alt="" className="btn-icon" />
+        <span>Добавить гостя</span>
       </button>
       <button 
         type="submit" 
         className="submit-btn"
         disabled={loading}
       >
-        {loading ? 'Отправка...' : 'Подтвердить'}
+        <img src="/confirm.png" alt="" className="btn-icon" />
+        <span>{loading ? 'Отправляем...' : 'Подтвердить участие'}</span>
       </button>
     </form>
   );

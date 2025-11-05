@@ -74,7 +74,7 @@ const EnvelopeAnimation = ({ onAnimationComplete }) => {
           <div className="ampersand">&</div>
           <h1 className="letter-text">Екатерина</h1>
           <div className="divider"></div>
-          <p className="letter-subtext">Приглашают вас</p>
+          <p className="letter-subtext">Save the Date</p>
         </div>
         <div className={`envelope-flap ${animationStarted ? 'open' : ''}`} id="flap"></div>
         <div className={`seal ${animationStarted ? 'fade-out' : ''}`} id="seal">
