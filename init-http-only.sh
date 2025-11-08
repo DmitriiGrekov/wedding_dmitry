@@ -181,14 +181,14 @@ services:
     environment:
       - DEBUG=False
       - SECRET_KEY=\${SECRET_KEY}
-      - ALLOWED_HOSTS=\${DOMAIN},localhost,127.0.0.1
+      - ALLOWED_HOSTS=\${DOMAIN},$SERVER_IP,localhost,127.0.0.1
       - DATABASE_URL=postgresql://\${POSTGRES_USER}:\${POSTGRES_PASSWORD}@db:5432/\${POSTGRES_DB}
       - POSTGRES_DB=\${POSTGRES_DB}
       - POSTGRES_USER=\${POSTGRES_USER}
       - POSTGRES_PASSWORD=\${POSTGRES_PASSWORD}
       - POSTGRES_HOST=db
       - POSTGRES_PORT=5432
-      - CORS_ALLOWED_ORIGINS=http://\${DOMAIN},http://localhost,http://127.0.0.1
+      - CORS_ALLOWED_ORIGINS=http://\${DOMAIN},http://$SERVER_IP,http://localhost,http://127.0.0.1
     depends_on:
       db:
         condition: service_healthy
