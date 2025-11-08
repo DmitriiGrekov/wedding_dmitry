@@ -46,6 +46,7 @@ mkdir -p certbot/conf
 mkdir -p certbot/www
 
 # Проверяем существующий сертификат
+FORCE_RENEWAL=""
 if [ -d "certbot/conf/live/$DOMAIN" ]; then
     echo "⚠️  Сертификат уже существует для $DOMAIN"
     read -p "   Заменить существующий сертификат? (y/N) " -n 1 -r
@@ -58,7 +59,8 @@ if [ -d "certbot/conf/live/$DOMAIN" ]; then
         docker compose -f docker-compose.prod.yml up -d
         exit 0
     fi
-    echo "🗑️  Удаление старого сертификата..."
+    echo "🔄 Установлен режим принудительного обновления сертификата..."
+    FORCE_RENEWAL="--force-renewal"
 fi
 
 # Создаем временную nginx конфигурацию без SSL
@@ -159,6 +161,9 @@ echo "🔐 Получение SSL сертификата от Let's Encrypt..."
 if [ -n "$STAGING_ARG" ]; then
     echo "   ⚠️  STAGING режим включен (тестовый сертификат)"
 fi
+if [ -n "$FORCE_RENEWAL" ]; then
+    echo "   🔄 Принудительное обновление сертификата"
+fi
 docker run --rm \
     -v "$(pwd)/certbot/conf:/etc/letsencrypt" \
     -v "$(pwd)/certbot/www:/var/www/certbot" \
@@ -169,8 +174,10 @@ docker run --rm \
     --email $EMAIL \
     --agree-tos \
     --no-eff-email \
+    --non-interactive \
     -v \
     $STAGING_ARG \
+    $FORCE_RENEWAL \
     -d $DOMAIN \
     -d www.$DOMAIN
 
