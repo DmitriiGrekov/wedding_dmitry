@@ -114,8 +114,51 @@ docker run -d \
 echo "⏳ Ожидание запуска nginx..."
 sleep 5
 
+# Тестируем доступность nginx и webroot
+echo "🧪 Тестирование доступности nginx..."
+mkdir -p certbot/www/.well-known/acme-challenge
+echo "test" > certbot/www/.well-known/acme-challenge/test.txt
+
+echo "   Проверка доступности тестового файла локально..."
+RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost/.well-known/acme-challenge/test.txt)
+if [ "$RESPONSE" = "200" ]; then
+    echo "   ✅ Nginx корректно отдает файлы из webroot (локально)"
+else
+    echo "   ❌ Nginx не может отдать тестовый файл локально (HTTP $RESPONSE)"
+    echo "   Проверяем логи nginx..."
+    docker logs temp_nginx 2>&1 | tail -20
+    echo ""
+    echo "   Проверяем содержимое webroot в контейнере..."
+    docker exec temp_nginx ls -la /var/www/certbot/.well-known/acme-challenge/ || echo "Директория не существует"
+    docker stop temp_nginx >/dev/null 2>&1 || true
+    docker rm temp_nginx >/dev/null 2>&1 || true
+    exit 1
+fi
+
+echo "   Проверка доступности через публичный домен..."
+RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" http://$DOMAIN/.well-known/acme-challenge/test.txt)
+if [ "$RESPONSE" = "200" ]; then
+    echo "   ✅ Файлы доступны через публичный домен"
+else
+    echo "   ⚠️  ВНИМАНИЕ: Файлы не доступны через публичный домен (HTTP $RESPONSE)"
+    echo "   Это может быть из-за:"
+    echo "   - DNS еще не распространились"
+    echo "   - Firewall блокирует порт 80"
+    echo "   - Домен указывает на другой IP"
+    echo ""
+    echo "   Проверьте DNS:"
+    echo "   $ dig +short $DOMAIN"
+    echo ""
+    echo "   Certbot скорее всего не сможет получить сертификат, но попробуем..."
+fi
+
+rm certbot/www/.well-known/acme-challenge/test.txt
+
 # Получаем сертификат
 echo "🔐 Получение SSL сертификата от Let's Encrypt..."
+if [ -n "$STAGING_ARG" ]; then
+    echo "   ⚠️  STAGING режим включен (тестовый сертификат)"
+fi
 docker run --rm \
     -v "$(pwd)/certbot/conf:/etc/letsencrypt" \
     -v "$(pwd)/certbot/www:/var/www/certbot" \
@@ -126,6 +169,7 @@ docker run --rm \
     --email $EMAIL \
     --agree-tos \
     --no-eff-email \
+    -v \
     $STAGING_ARG \
     -d $DOMAIN \
     -d www.$DOMAIN
@@ -139,10 +183,39 @@ docker rm temp_nginx >/dev/null 2>&1 || true
 
 if [ $CERTBOT_EXIT_CODE -ne 0 ]; then
     echo "❌ Ошибка получения сертификата!"
-    echo "   Проверьте:"
-    echo "   1. DNS записи указывают на этот сервер"
-    echo "   2. Порт 80 открыт в firewall"
-    echo "   3. Домен доступен из интернета"
+    echo ""
+    echo "🔍 Диагностика:"
+    echo "   1. Проверка DNS записей:"
+    dig +short $DOMAIN
+    dig +short www.$DOMAIN
+    echo ""
+    echo "   2. Проверка портов:"
+    netstat -tuln | grep ':80 ' || ss -tuln | grep ':80 '
+    echo ""
+    echo "   3. Проверка доступности домена извне:"
+    echo "      curl -I http://$DOMAIN"
+    echo ""
+    echo "   4. Содержимое webroot на хосте:"
+    ls -la certbot/www/.well-known/acme-challenge/ 2>/dev/null || echo "      Директория пуста или не существует"
+    echo ""
+    echo "   5. Лог certbot:"
+    if [ -f "certbot/conf/letsencrypt.log" ]; then
+        tail -50 certbot/conf/letsencrypt.log
+    else
+        echo "      Лог не найден"
+    fi
+    echo ""
+    echo "💡 Возможные причины:"
+    echo "   • DNS записи не указывают на этот сервер (194.58.112.174)"
+    echo "   • Порт 80 закрыт в firewall"
+    echo "   • Домен недоступен из интернета"
+    echo "   • Уже выпущено слишком много сертификатов (rate limit)"
+    echo ""
+    echo "🔧 Попробуйте:"
+    echo "   • Проверить DNS: dig +short $DOMAIN"
+    echo "   • Проверить firewall: sudo ufw status"
+    echo "   • Проверить доступность: curl -I http://$DOMAIN"
+    echo "   • Использовать staging режим для тестов (раскомментируйте STAGING_ARG в скрипте)"
     exit 1
 fi
 
