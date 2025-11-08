@@ -72,7 +72,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx/nginx.prod.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/nginx.final.conf:/etc/nginx/nginx.conf:ro
       - static_volume:/app/staticfiles:ro
       - media_volume:/app/media:ro
       - certbot_conf:/etc/letsencrypt:ro
