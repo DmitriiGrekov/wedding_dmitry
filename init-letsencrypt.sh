@@ -108,7 +108,7 @@ docker run -d \
     --name temp_nginx \
     -p 80:80 \
     -v "$(pwd)/nginx/nginx.temp.conf:/etc/nginx/nginx.conf:ro" \
-    -v "$(pwd)/certbot/www:/var/www/certbot:ro" \
+    -v "$(pwd)/certbot/www:/var/www/certbot" \
     nginx:alpine
 
 echo "⏳ Ожидание запуска nginx..."
