@@ -8,6 +8,8 @@
   -webkit-transform: translateZ(0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  /* Оптимизация для мобильных */
+  -webkit-overflow-scrolling: touch;
 }
 
 .event-info-mobile::before {
@@ -32,17 +34,19 @@
   width: 100%;
   padding: 1.8rem 1.5rem;
   background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   border-radius: 20px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
   color: #ecfbff;
   text-align: center;
-  will-change: transform;
+  will-change: auto;
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  /* Оптимизация рендеринга */
+  contain: layout style paint;
 }
 
 /* Специфичные стили для блоков */

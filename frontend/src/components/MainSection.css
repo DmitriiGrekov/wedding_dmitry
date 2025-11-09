@@ -50,14 +50,14 @@
   z-index: 2;
   text-align: center;
   background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   padding: 2rem 3rem;
   border-radius: 15px;
   max-width: 700px;
   box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
   /* GPU ускорение */
-  will-change: transform;
+  will-change: auto;
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
   backface-visibility: hidden;
@@ -198,8 +198,8 @@
   .mid-content {
     background: rgba(255, 255, 255, 0.4);
     border-radius: 20px;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     padding: 7rem 7rem;
     max-width: 85%;
   }

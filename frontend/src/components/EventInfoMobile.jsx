@@ -126,6 +126,7 @@ const EventInfoMobile = () => {
               frameBorder="0"
               style={{ border: 0, borderRadius: '16px' }}
               allowFullScreen
+              loading="lazy"
               title="Место проведения"
             ></iframe>
           </div>
