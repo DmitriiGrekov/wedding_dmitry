@@ -6,6 +6,9 @@
   justify-content: center;
   min-height: 100vh;
   overflow: hidden;
+  /* GPU ускорение */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 .left-image,
@@ -19,8 +22,17 @@
   background-repeat: no-repeat;
   z-index: 1;
   pointer-events: none;
-  background: url("/background-header.webp") no-repeat center/cover;
+  background-image: url("/background-header.webp");
   overflow: hidden;
+  /* GPU ускорение и оптимизация рендеринга */
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  /* Оптимизация изображения */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 
 .left-image {
@@ -39,10 +51,17 @@
   text-align: center;
   background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   padding: 2rem 3rem;
   border-radius: 15px;
   max-width: 700px;
   box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+  /* GPU ускорение */
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .subtitle {
@@ -113,6 +132,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 10;
+  pointer-events: auto;
+  /* GPU ускорение */
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 .scroll-arrow-icon {
@@ -120,9 +147,13 @@
   height: 48px;
   object-fit: contain;
   position: relative;
-  z-index: 2;
   transition: transform 0.2s ease;
   transform: rotate(180deg);
+  pointer-events: none;
+  /* GPU ускорение */
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .scroll-down:hover {
@@ -140,13 +171,13 @@
 
 @keyframes bounce {
   0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
+    transform: translateY(0) translateZ(0);
   }
   40% {
-    transform: translateY(10px);
+    transform: translateY(10px) translateZ(0);
   }
   60% {
-    transform: translateY(5px);
+    transform: translateY(5px) translateZ(0);
   }
 }
 
@@ -164,6 +195,7 @@
     background: rgba(255, 255, 255, 0.4);
     border-radius: 20px;
     backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     padding: 7rem 7rem;
     max-width: 85%;
   }

@@ -33,8 +33,18 @@ const EnvelopeAnimation = ({ onAnimationComplete }) => {
     }, 4000);
   };
 
-  // Создаем массив для конфетти
-  const confettiPieces = Array.from({ length: 50 }, (_, i) => ({
+  // Определяем количество конфетти в зависимости от размера экрана
+  const getConfettiCount = () => {
+    if (typeof window !== 'undefined') {
+      // Меньше конфетти на мобильных для лучшей производительности
+      if (window.innerWidth <= 480) return 25;
+      if (window.innerWidth <= 768) return 35;
+    }
+    return 50;
+  };
+
+  // Создаем массив для конфетти с адаптивным количеством
+  const confettiPieces = Array.from({ length: getConfettiCount() }, (_, i) => ({
     id: i,
     left: Math.random() * 100,
     delay: Math.random() * 1,

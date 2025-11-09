@@ -3,17 +3,29 @@ import Countdown from './Countdown';
 import './MainSection.css';
 
 const MainSection = ({ eventDate }) => {
-  const scrollToEventInfo = () => {
-    const eventSection = document.querySelector('.event-info');
-    if (eventSection) {
-      const elementPosition = eventSection.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
+  const scrollToEventInfo = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Даем небольшую задержку для рендера
+    setTimeout(() => {
+      const eventSection = document.querySelector('.event-info');
+      
+      if (eventSection) {
+        // Используем scrollIntoView - самый надежный метод
+        
+        eventSection.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      } else {
+        // Если элемент не найден, скроллим на высоту экрана
+        window.scrollTo({
+          top: window.innerHeight,
+          behavior: 'smooth'
+        });
+      }
+    }, 100);
   };
 
   return (
@@ -38,8 +50,8 @@ const MainSection = ({ eventDate }) => {
         <div className="year">2026 года</div>
 
         <Countdown eventDate={eventDate} />
-        <button className="scroll-down" onClick={scrollToEventInfo}>
-          <img src="/arrow.png" alt="" className="scroll-arrow-icon" />
+        <button className="scroll-down" onClick={scrollToEventInfo} type="button">
+          <img src="/arrow.png" alt="Скролл вниз" className="scroll-arrow-icon" />
         </button>
       </div>
 
