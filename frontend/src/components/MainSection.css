@@ -134,6 +134,10 @@
   justify-content: center;
   z-index: 10;
   pointer-events: auto;
+  /* Улучшение для сенсорных устройств */
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
   /* GPU ускорение */
   will-change: transform;
   backface-visibility: hidden;

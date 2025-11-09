@@ -9,17 +9,35 @@ const MainSection = ({ eventDate }) => {
     
     // Даем небольшую задержку для рендера
     setTimeout(() => {
-      const eventSection = document.querySelector('.event-info');
+      // Находим оба элемента
+      const eventInfo = document.querySelector('.event-info');
+      const eventInfoMobile = document.querySelector('.event-info-mobile');
       
-      if (eventSection) {
+      // Проверяем, какой элемент видим
+      let targetSection = null;
+      
+      if (eventInfo) {
+        const style = window.getComputedStyle(eventInfo);
+        if (style.display !== 'none') {
+          targetSection = eventInfo;
+        }
+      }
+      
+      if (!targetSection && eventInfoMobile) {
+        const style = window.getComputedStyle(eventInfoMobile);
+        if (style.display !== 'none') {
+          targetSection = eventInfoMobile;
+        }
+      }
+      
+      if (targetSection) {
         // Используем scrollIntoView - самый надежный метод
-        
-        eventSection.scrollIntoView({
+        targetSection.scrollIntoView({
           behavior: 'smooth',
           block: 'start'
         });
       } else {
-        // Если элемент не найден, скроллим на высоту экрана
+        // Если элемент не найден или скрыт, скроллим на высоту экрана
         window.scrollTo({
           top: window.innerHeight,
           behavior: 'smooth'

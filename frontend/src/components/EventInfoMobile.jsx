@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Schedule from './Schedule';
 import GuestForm from './GuestForm';
 import TelegramQR from './TelegramQR';
-import './EventInfo.css';
+import './EventInfoMobile.css';
 
-const EventInfo = () => {
+const EventInfoMobile = () => {
   const [guestNames, setGuestNames] = useState('Гость');
   const [isPlural, setIsPlural] = useState(false);
   const [gender, setGender] = useState('neutral');
@@ -60,9 +59,10 @@ const EventInfo = () => {
   const greeting = getGreeting();
 
   return (
-    <section className="event-info">
-      <div className="event-overlay">
-        <div className="event-content">
+    <section className="event-info-mobile">
+      <div className="event-overlay-mobile">
+        {/* Блок приглашения */}
+        <div className="event-block invitation-block">
           <h2>
             {loading ? (
               <>Дорогой<br />Гость!</>
@@ -82,17 +82,62 @@ const EventInfo = () => {
             Будем счастливы видеть вас на нашем празднике!
           </p>
 
-          <p>
+          <p className="event-date">
             <strong>18.07.2026 в 10:00</strong>
           </p>
 
           <h3>О подарках</h3>
           <p>Ваше присутствие — лучший подарок для нас! Но если хотите порадовать нас чем-то особенным, мы будем благодарны за вклад в наше совместное будущее 💝</p>
+        </div>
 
-          <Schedule />
+        {/* Блок расписания и места проведения */}
+        <div className="event-block schedule-block">
+          <h2>План празднования</h2>
 
+          <div className="schedule-item-mobile">
+            <time>10:00</time>
+            <div>
+              <strong>Церемония в ЗАГСе</strong>
+              <p>
+                Самый волнующий момент! Будем рады, если вы разделите 
+                с нами эти особенные минуты, когда мы официально станем семьей ✨
+              </p>
+            </div>
+          </div>
+
+          <div className="schedule-item-mobile">
+            <time>12:00</time>
+            <div>
+              <strong>Праздничный банкет</strong>
+              <p>
+                После церемонии отправляемся отмечать! 
+                Трансфер до банкетного зала организован (2 комфортабельных минивэна). 
+                Приготовьтесь к веселью, танцам и отличной компании! 🎉
+              </p>
+            </div>
+          </div>
+
+          <h3 className="map-title">Место проведения</h3>
+          <div className="map-container">
+            <iframe
+              src="https://yandex.ru/map-widget/v1/?um=constructor%3Aee33a1ba858e5427672eaf6a7750f77d38e46ea509913d1f14408dd25661533e&amp;source=constructor"
+              width="100%"
+              height="300"
+              frameBorder="0"
+              style={{ border: 0, borderRadius: '16px' }}
+              allowFullScreen
+              title="Место проведения"
+            ></iframe>
+          </div>
+        </div>
+
+        {/* Блок подтверждения участия */}
+        <div className="event-block confirmation-block">
           <GuestForm />
+        </div>
 
+        {/* Блок Telegram */}
+        <div className="event-block telegram-block">
           <TelegramQR />
         </div>
       </div>
@@ -100,5 +145,5 @@ const EventInfo = () => {
   );
 };
 
-export default EventInfo;
+export default EventInfoMobile;
 

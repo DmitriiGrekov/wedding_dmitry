@@ -1,0 +1,296 @@
+.event-info-mobile {
+  position: relative;
+  background: url("/background.webp") no-repeat center/cover;
+  color: white;
+  text-align: center;
+  padding: 2rem 1rem;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.event-info-mobile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+.event-overlay-mobile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 100%;
+  z-index: 2;
+}
+
+.event-block {
+  position: relative;
+  width: 100%;
+  padding: 1.8rem 1.5rem;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  color: #ecfbff;
+  text-align: center;
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Специфичные стили для блоков */
+.invitation-block {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.schedule-block {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.confirmation-block {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.telegram-block {
+  background: rgba(0, 136, 204, 0.12);
+  border: 1px solid rgba(0, 136, 204, 0.3);
+}
+
+.event-block h2 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  font-weight: 400;
+}
+
+.schedule-block h2,
+.map-block h2 {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #ffd966;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.event-block h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  margin-top: 1.5rem;
+  margin-bottom: 0.8rem;
+  font-size: 1.3rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #ffd966;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.event-block p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0.8rem 0;
+  color: #ffffff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.event-date {
+  margin-top: 1.2rem !important;
+  margin-bottom: 1.2rem !important;
+  font-size: 1.1rem !important;
+}
+
+/* Стили для блока расписания */
+.schedule-block {
+  text-align: left;
+}
+
+.schedule-block h2 {
+  text-align: center;
+}
+
+.map-title {
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.schedule-item-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.schedule-item-mobile:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.schedule-item-mobile time {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #ffd966;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.schedule-item-mobile strong {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  color: #ffffff;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.schedule-item-mobile p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* Стили для блока карты */
+.map-container {
+  margin-top: 1rem;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* Адаптив для очень маленьких экранов */
+@media (max-width: 500px) {
+  .event-info-mobile {
+    padding: 1.5rem 0.8rem;
+  }
+
+  .event-overlay-mobile {
+    gap: 1rem;
+  }
+
+  .event-block {
+    padding: 1.5rem 1.2rem;
+    border-radius: 16px;
+  }
+
+  .event-block h2 {
+    font-size: 2rem;
+  }
+
+  .schedule-block h2,
+  .map-block h2 {
+    font-size: 1.3rem;
+    letter-spacing: 1.5px;
+  }
+
+  .event-block h3 {
+    font-size: 1.2rem;
+    letter-spacing: 1.5px;
+  }
+
+  .event-block p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .schedule-item-mobile time {
+    font-size: 1.1rem;
+  }
+
+  .schedule-item-mobile strong {
+    font-size: 1rem;
+  }
+
+  .schedule-item-mobile p {
+    font-size: 0.9rem;
+  }
+
+  .map-container iframe {
+    height: 250px;
+  }
+}
+
+@media (max-width: 380px) {
+  .event-info-mobile {
+    padding: 1.2rem 0.5rem;
+  }
+
+  .event-overlay-mobile {
+    gap: 0.8rem;
+  }
+
+  .event-block {
+    padding: 1.2rem 1rem;
+    border-radius: 14px;
+  }
+
+  .event-block h2 {
+    font-size: 1.8rem;
+    line-height: 1.2;
+  }
+
+  .schedule-block h2,
+  .map-block h2 {
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+  }
+
+  .event-block h3 {
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+  }
+
+  .event-block p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .schedule-item-mobile {
+    gap: 0.4rem;
+    margin-bottom: 1.2rem;
+    padding-bottom: 1.2rem;
+  }
+
+  .schedule-item-mobile time {
+    font-size: 1rem;
+  }
+
+  .schedule-item-mobile strong {
+    font-size: 0.95rem;
+  }
+
+  .schedule-item-mobile p {
+    font-size: 0.85rem;
+  }
+
+  .map-container iframe {
+    height: 220px;
+    border-radius: 12px;
+  }
+}
+
+/* Показывать только на мобильных устройствах */
+@media (min-width: 769px) {
+  .event-info-mobile {
+    display: none;
+  }
+}
+

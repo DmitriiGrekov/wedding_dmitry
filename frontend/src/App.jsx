@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import EnvelopeAnimation from './components/EnvelopeAnimation';
 import MainSection from './components/MainSection';
 import EventInfo from './components/EventInfo';
+import EventInfoMobile from './components/EventInfoMobile';
 import './App.css';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       <div className={`main-content ${showContent ? 'visible' : ''}`}>
         <MainSection eventDate={eventDate} />
         <EventInfo />
+        <EventInfoMobile />
       </div>
     </div>
   );

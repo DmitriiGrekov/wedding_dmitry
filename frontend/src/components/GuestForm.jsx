@@ -103,6 +103,12 @@ const GuestForm = () => {
 
   return (
     <form id="guests-form" onSubmit={handleSubmit}>
+      <h3 className="form-title">Подтвердите участие</h3>
+      <p className="form-description">
+        Пожалуйста, дайте нам знать о своих планах до <strong>1 января 2025</strong> — 
+        так мы сможем всё подготовить идеально!
+      </p>
+
       {/* Сообщение о статусе отправки */}
       {submitStatus.message && (
         <div className={`submit-status ${submitStatus.type}`}>
