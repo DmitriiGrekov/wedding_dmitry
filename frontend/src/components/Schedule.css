@@ -42,7 +42,7 @@
 }
 
 .schedule-item time {
-  font-family: 'Cormorant Garamond', serif !important;
+  font-family: "Lobster", sans-serif !important;
   font-weight: 600 !important;
   font-size: 1.3rem !important;
   min-width: 60px !important;
@@ -52,9 +52,9 @@
 }
 
 .schedule-item p {
-  font-family: 'Inter', sans-serif !important;
+  font-family: "PT Serif", serif !important;
   margin: 0 !important;
-  font-size: 1.05rem !important;
+  font-size: 1.1rem !important;
   color: #ffffff !important;
   line-height: 1.7 !important;
   text-align: left !important;
@@ -69,7 +69,7 @@
 }
 
 .schedule-map h3 {
-  font-family: 'Inter', sans-serif !important;
+  font-family: "PT Serif", serif !important;
   font-size: 1.5rem !important;
   font-weight: 600 !important;
   margin-bottom: 1rem !important;

@@ -20,6 +20,10 @@
   z-index: 1;
 }
 
+.event-block .invitation-block-title {
+  font-size: 3.5rem !important;
+}
+
 .event-overlay-mobile {
   position: relative;
   display: flex;
@@ -78,7 +82,7 @@
 
 .schedule-block h2,
 .map-block h2 {
-  font-family: 'Inter', sans-serif;
+  font-family: "PT Serif", serif;
   font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: 2px;
@@ -88,7 +92,7 @@
 }
 
 .event-block h3 {
-  font-family: 'Inter', sans-serif;
+  font-family: "PT Serif", serif;
   font-weight: 600;
   font-style: normal;
   margin-top: 1.5rem;
@@ -101,8 +105,8 @@
 }
 
 .event-block p {
-  font-family: 'Inter', sans-serif;
-  font-size: 1rem;
+  font-family: "PT Serif", serif;
+  font-size: 1.1rem !important;
   line-height: 1.7;
   margin: 0.8rem 0;
   color: #ffffff;
@@ -135,9 +139,11 @@
 .schedule-item-mobile {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  /* gap: 0.5rem; */
   margin-bottom: 1.5rem;
   padding-bottom: 1.5rem;
+  font-family: "PT Serif", serif;
+  font-size: 1.1rem !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -148,8 +154,8 @@
 }
 
 .schedule-item-mobile time {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 600;
+  font-family: "Lobster", sans-serif;
+  font-weight: 400;
   font-size: 1.2rem;
   color: #ffd966;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
@@ -157,8 +163,8 @@
 
 .schedule-item-mobile strong {
   display: block;
-  font-family: 'Inter', sans-serif;
-  font-size: 1.1rem;
+  font-family: "PT Serif", serif;
+  font-size: 1.3rem !important;
   color: #ffffff;
   margin-bottom: 0.3rem;
   font-weight: 600;
@@ -166,7 +172,8 @@
 }
 
 .schedule-item-mobile p {
-  font-size: 0.95rem;
+  font-family: "PT Serif", serif;
+  font-size: 1.1rem !important;
   line-height: 1.6;
   margin: 0;
   color: #ffffff;

@@ -30,8 +30,9 @@
 
 /* Стили для заголовка и описания формы */
 .form-title {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.3rem;
+  font-family: "PT Serif", serif;
+  margin-top: 0.5rem !important;
+  font-size: 1.6rem;
   color: #ffd966;
   margin: 0 0 0.8rem 0;
   text-align: center;
@@ -42,8 +43,8 @@
 }
 
 .form-description {
-  font-family: 'Inter', sans-serif;
-  font-size: 1rem;
+  font-family: "PT Serif", serif;
+  font-size: 1.1rem !important;
   line-height: 1.7;
   color: #ffffff;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);

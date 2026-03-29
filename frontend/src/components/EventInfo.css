@@ -48,6 +48,11 @@
   -webkit-backface-visibility: hidden;
 }
 
+.schedule-item .position{
+  margin-top: 1rem;
+}
+
+
 .event-content h2 {
   font-family: 'Great Vibes', cursive;
   font-size: 3.5rem;
@@ -58,7 +63,7 @@
 }
 
 .event-content h3 {
-  font-family: 'Inter', sans-serif;
+  font-family: "PT Serif", serif;
   font-weight: 600;
   font-style: normal;
   margin-top: 2rem;
@@ -70,7 +75,7 @@
 }
 
 .event-content p {
-  font-family: 'Inter', sans-serif;
+  font-family: "PT Serif", serif;
   font-size: 1.05rem;
   line-height: 1.8;
   margin: 0.8rem 0;
@@ -101,6 +106,11 @@
     font-size: 1rem;
     line-height: 1.5;
   }
+
+  .schedule-item .position{
+    margin-top: 1rem;
+  }
+  
 }
 
 @media (max-width: 600px) {

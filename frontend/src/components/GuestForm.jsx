@@ -105,12 +105,12 @@ const GuestForm = () => {
     <form id="guests-form" onSubmit={handleSubmit}>
       <h3 className="form-title">Подтвердите участие</h3>
       <p className="form-description">
-        Пожалуйста, дайте нам знать о своих планах до <strong>1 января 2025</strong> — 
+        Пожалуйста, подтвертиде свое присутствие до <strong>31 мая 2026 года</strong> — 
         так мы сможем всё подготовить идеально!
       </p>
 
       {/* Сообщение о статусе отправки */}
-      {submitStatus.message && (
+      {/* {submitStatus.message && (
         <div className={`submit-status ${submitStatus.type}`}>
           {submitStatus.message.split('\n').map((line, i) => (
             <div key={i}>{line}</div>
@@ -167,7 +167,7 @@ const GuestForm = () => {
       >
         <img src="/confirm.png" alt="" className="btn-icon" />
         <span>{loading ? 'Отправляем...' : 'Подтвердить участие'}</span>
-      </button>
+      </button> */}
     </form>
   );
 };

@@ -356,12 +356,11 @@ body:has(#envelope-wrapper:not(.hidden)) {
 
 .click-hint {
   position: absolute;
-  bottom: -60px;
+  bottom: -100px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 0.85rem;
-  color: #2c3e50;
-  letter-spacing: 1px;
+  font-size: 1.1rem;
+  color: #030405;
   opacity: 0.7;
   animation: float 2.5s ease-in-out infinite;
 }
@@ -410,8 +409,8 @@ body:has(#envelope-wrapper:not(.hidden)) {
   }
 
   .click-hint {
-    font-size: 0.75rem;
-    bottom: -50px;
+    font-size: 1.1rem;
+    bottom: -100px;
   }
 }
 
@@ -462,8 +461,9 @@ body:has(#envelope-wrapper:not(.hidden)) {
   }
 
   .click-hint {
-    font-size: 0.7rem;
-    bottom: -45px;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    bottom: -10rem;
   }
 
   .confetti {

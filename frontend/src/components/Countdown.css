@@ -8,13 +8,20 @@
 
 .time-block {
   text-align: center;
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Lobster', sans-serif;
 }
 
 .time-value {
-  font-size: 1.7rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  /* font-size: 1.7rem;
+  font-weight: 400;
+  letter-spacing: 0.5px; */
+
+  font-family: "PT Serif", serif;
+  text-transform: uppercase;
+  font-size: 1.3rem;
+  color: #1a1a1a;
+  letter-spacing: 2.5px;
+  font-weight: 500;
 }
 
 .time-label {
@@ -29,7 +36,7 @@
 @media (max-width: 900px) {
   .countdown {
     gap: 1.5rem;
-    margin-top: 1.8rem;
+    /* margin-top: 1.8rem; */
   }
 
   .time-value {
@@ -44,7 +51,7 @@
 @media (max-width: 600px) {
   .countdown {
     gap: 1rem;
-    margin-top: 1.5rem;
+    /* margin-top: 1.5rem; */
   }
 
   .time-block {
@@ -52,11 +59,11 @@
   }
 
   .time-value {
-    font-size: 1.1rem;
+    font-size: 1.4rem;
   }
 
   .time-label {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
   }
 }
 
@@ -71,11 +78,11 @@
   }
 
   .time-value {
-    font-size: 1rem;
+    font-size: 1.4rem;
   }
 
   .time-label {
-    font-size: 0.65rem;
+    font-size: 0.8rem;
   }
 }
 

@@ -56,19 +56,19 @@ const Countdown = ({ eventDate }) => {
         <div className="time-label">недель</div>
       </div>
       <div className="time-block">
-        <div className="time-value">{String(timeLeft.days).padStart(2, '0')}</div>
+        <div className="time-value">{String(timeLeft.days)}</div>
         <div className="time-label">дней</div>
       </div>
       <div className="time-block">
-        <div className="time-value">{String(timeLeft.hours).padStart(2, '0')}</div>
+        <div className="time-value">{String(timeLeft.hours)}</div>
         <div className="time-label">часов</div>
       </div>
       <div className="time-block">
-        <div className="time-value">{String(timeLeft.minutes).padStart(2, '0')}</div>
+        <div className="time-value">{String(timeLeft.minutes)}</div>
         <div className="time-label">минут</div>
       </div>
       <div className="time-block">
-        <div className="time-value">{String(timeLeft.seconds).padStart(2, '0')}</div>
+        <div className="time-value">{String(timeLeft.seconds)}</div>
         <div className="time-label">секунд</div>
       </div>
     </div>

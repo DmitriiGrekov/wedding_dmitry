@@ -62,9 +62,10 @@ const MainSection = ({ eventDate }) => {
         <div className="invite">
           С радостью приглашаем вас
           <br />
-          отпраздновать нашу свадьбу
+          на нашу свадьбу, которая состоится
         </div>
-        <div className="date">18 июля</div>
+        <br />
+        <div className="date">18 Июля</div>
         <div className="year">2026 года</div>
 
         <Countdown eventDate={eventDate} />
