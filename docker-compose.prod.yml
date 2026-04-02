@@ -56,7 +56,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile.prod
       args:
-        - VITE_API_URL=https://${DOMAIN}/api
+        - VITE_API_URL=${VITE_API_URL:-https://${DOMAIN}/api}
     container_name: wedding_frontend_prod
     expose:
       - "80"
