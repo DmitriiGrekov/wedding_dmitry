@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import QRCodeStyling from 'qr-code-styling';
 import './TelegramQR.css';
 
-const TelegramQR = ({ telegramLink = 'https://t.me/ВАША_ССЫЛКА_НА_ГРУППУ' }) => {
+const TelegramQR = ({ telegramLink = 'https://vk.me/join/OsfJs0IWihIL4je8grW_FGZf9enCaFHmj_M=' }) => {
   const qrRef = useRef(null);
   const qrCodeRef = useRef(null);
 
